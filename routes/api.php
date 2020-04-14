@@ -13,6 +13,30 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+//Route::prefix('v1')->name('api.v1')->group(function() {
+//    Route::get('version',function() {
+//        return 'v1';
+//    });
+//});
+//
+//Route::prefix('v2')->name('api.v2')->group(function() {
+//    Route::get('version',function() {
+//        return 'v2';
+//    });
+//});
+
+Route::prefix('v1')->name('api.v1.')->group(function() {
+    Route::get('version', function() {
+        return 'this is version v1';
+    });
+});
+
+Route::prefix('v2')->name('api.v2.')->group(function() {
+    Route::get('version', function() {
+        return 'this is version v2';
+    })->name('version');
 });
