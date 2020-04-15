@@ -34,6 +34,7 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
     Route::get('version', function() {return 'this is version v1';});
     //短信验证码
     Route::post('verificationCodes', 'VerificationCodesController@store');
+    Route::post('users','UsersController@store');
 });
 
 
