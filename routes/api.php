@@ -32,9 +32,16 @@ use Illuminate\Http\Request;
 /** V1版本 */
 Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
     Route::get('version', function() {return 'this is version v1';});
-    //短信验证码
-    Route::post('verificationCodes', 'VerificationCodesController@store');
-    Route::post('users','UsersController@store');
+    Route::middleware('throttle:'.config('api.rate_limit.sign'))->group(function() {
+        // 短信验证码
+        Route::post('verificationCodes', 'VerificationCodesController@store');
+        // 用户注册
+        Route::post('users','UsersController@store');
+    });
+
+    Route::middleware('throttle:'.config('api.rate_limit.access'))->group(function() {
+
+    });
 });
 
 
