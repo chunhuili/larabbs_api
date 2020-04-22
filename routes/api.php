@@ -40,9 +40,13 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
         // 用户注册
         Route::post('users','UsersController@store');
         // 第三方登录
-        Route::post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')
-            ->where('social_type', 'weixin')
-            ->name('socials.authorizations.store');
+        Route::post('socials/{social_type}/authorizations', 'AuthorizationsController@socialStore')->where('social_type', 'weixin');
+        // 登录
+        Route::post('authorizations', 'AuthorizationsController@store');
+        // 刷新token
+        Route::put('authorizations/current', 'AuthorizationsController@update');
+        // 删除token
+        Route::delete('authorizations/current', 'AuthorizationsController@destroy');
 //    });
 
     Route::middleware('throttle:'.config('api.rate_limit.access'))->group(function() {
