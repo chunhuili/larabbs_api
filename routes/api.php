@@ -77,6 +77,9 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
             Route::post('topics/{topic}/replies', 'RepliesController@store');
             // 删除回复
             Route::delete('topics/{topic}/replies/{reply}', 'RepliesController@destroy');
+
+            // 当前登录用户权限
+            Route::get('user/permissions', 'PermissionsController@index');
         });
 //    });
 
