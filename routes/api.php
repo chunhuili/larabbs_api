@@ -30,7 +30,7 @@ use Illuminate\Http\Request;
 //});
 
 /** V1版本 */
-Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
+Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1.')->group(function() {
     Route::get('version', function() {return 'this is version v1';});
 //    Route::middleware('throttle:'.config('api.rate_limit.sign'))->group(function() {
         // 图片验证码
@@ -60,6 +60,8 @@ Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function() {
         Route::resource('topics', 'TopicsController')->only([
             'index', 'show'
         ]);
+        // 资源推荐
+        Route::get('links', 'LinksController@index');
 
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function() {
